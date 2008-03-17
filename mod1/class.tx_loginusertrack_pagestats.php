@@ -115,7 +115,7 @@ class tx_loginusertrack_pagestats {
 				'tx_loginusertrack_pagestat t1 LEFT JOIN pages t2 ON ' .
 				't1.page_id=t2.uid WHERE fe_user=' . intval($user) .
 				t3lib_BEfunc::deleteClause('pages', 't2') .
-				' GROUP BY page_id ORDER BY num_hits DESC'
+				' GROUP BY page_id ORDER BY hits DESC'
 			);
 		$num = 0;
 		$numResults = $GLOBALS['TYPO3_DB']->sql_num_rows($res);
