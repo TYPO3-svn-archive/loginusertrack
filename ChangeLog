@@ -2,6 +2,7 @@
 
 	* Convert locallang files to XML format
 	* Added reference index to TSFE hook
+	* Added tables to $TCA to prevent Install tool from deleting them
 
 2008-03-13	Dmitry Dulepov	<dmitry@typo3.org>
 
