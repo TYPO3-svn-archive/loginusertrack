@@ -31,6 +31,9 @@
  * [CLASS/FUNCTION INDEX of SCRIPT]
  */
 
+require_once(PATH_t3lib . 'class.t3lib_befunc.php');
+require_once(PATH_t3lib . 'class.t3lib_refindex.php');
+
 /**
  * This class contains a hook to {@link tslib_fe::checkDataSubmission} function.
  * It will check FE user data and record changes. This hook is used instead of
@@ -93,6 +96,12 @@ class tx_loginusertrack_tsfehook {
 			'sesstat_uid' => $sesstat_uid,
 		);
 		$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_loginusertrack_pagestat', $fields);
+		$pagestat_uid = $GLOBALS['TYPO3_DB']->sql_insert_id();
+
+		$ref = t3lib_div::makeInstance('t3lib_refindex');
+		/* @var $ref t3lib_refindex */
+		$ref->updateRefIndexTable('tx_loginusertrack_stat', $sesstat_uid);
+		$ref->updateRefIndexTable('tx_loginusertrack_pagestat', $pagestat_uid);
 	}
 
 	/**
@@ -132,6 +141,10 @@ class tx_loginusertrack_tsfehook {
 						'sesstat_uid' => $sesstat_uid,
 					);
 					$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_loginusertrack_pagestat', $fields);
+
+					$ref = t3lib_div::makeInstance('t3lib_refindex');
+					/* @var $ref t3lib_refindex */
+					$ref->updateRefIndexTable('tx_loginusertrack_pagestat', $GLOBALS['TYPO3_DB']->sql_insert_id());
 				}
 			}
 		}

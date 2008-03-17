@@ -1,3 +1,8 @@
+2008-03-17	Dmitry Dulepov	<dmitry@typo3.org>
+
+	* Convert locallang files to XML format
+	* Added reference index to TSFE hook
+
 2008-03-13	Dmitry Dulepov	<dmitry@typo3.org>
 
 	* Changed ext to use TSFE hook instead of XCLASS
