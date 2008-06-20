@@ -1,3 +1,8 @@
+2008-06-20	Dmitry Dulepov	<dmitry@typo3.org>
+
+	* Removed xclass from SVN
+	* Added $GLOBALS to ext_localconf.php
+
 2008-03-17	Dmitry Dulepov	<dmitry@typo3.org>
 
 	* Convert locallang files to XML format
