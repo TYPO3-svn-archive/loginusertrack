@@ -102,7 +102,7 @@ class tx_loginusertrack_module1 extends t3lib_SCbase {
 				</script>
 			';
 
-			$headerSection = $this->doc->getHeader('pages',$this->pageinfo,$this->pageinfo['_thePath']).'<br>'.$LANG->php3Lang['labels']['path'].': '.t3lib_div::fixed_lgd_pre($this->pageinfo['_thePath'],50);
+			$headerSection = $this->doc->getHeader('pages',$this->pageinfo,$this->pageinfo['_thePath']).'<br>'.$LANG->sL('LLL:EXT:lang/locallang_core.php:labels.path').': '.t3lib_div::fixed_lgd_pre($this->pageinfo['_thePath'],50);
 
 			$this->content.=$this->doc->startPage($LANG->getLL('title'));
 			$this->content.=$this->doc->header($LANG->getLL('title'));
@@ -172,10 +172,10 @@ class tx_loginusertrack_module1 extends t3lib_SCbase {
 					}
 					$list[]='<tr bgcolor="'.$this->doc->bgColor4.'">
 						<td nowrap>'.date($GLOBALS['TYPO3_CONF_VARS']['SYS']['ddmmyy'].' '.$GLOBALS['TYPO3_CONF_VARS']['SYS']['hhmm'],$row['session_login']).'</td>
-						<td nowrap>'.t3lib_BEfunc::calcAge(time()-$row['session_login'],$GLOBALS['LANG']->php3Lang['labels']['minutesHoursDaysYears']).'</td>
+						<td nowrap>'.t3lib_BEfunc::calcAge(time()-$row['session_login'],$GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.php:labels.minutesHoursDaysYears')).'</td>
 						<td nowrap><a href="index.php?id='.$this->id.'&useruid='.$row['user_uid'].$extra.'">'.$row['username'].'</a></td>
 						<td nowrap>'.$row['name'].'</td>
-						<td nowrap>'.t3lib_BEfunc::calcAge($row['last_page_hit']-$row['session_login'],$GLOBALS['LANG']->php3Lang['labels']['minutesHoursDaysYears']).'</td>
+						<td nowrap>'.t3lib_BEfunc::calcAge($row['last_page_hit']-$row['session_login'],$GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.php:labels.minutesHoursDaysYears')).'</td>
 						<td>'.$row['session_hit_counter'].'</td>
 					</tr>
 					';
@@ -228,7 +228,7 @@ class tx_loginusertrack_module1 extends t3lib_SCbase {
 					while (($row=$GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
 						$list[]='<tr bgcolor="'.$this->doc->bgColor4.'">
 							<td nowrap>'.date($GLOBALS['TYPO3_CONF_VARS']['SYS']['ddmmyy'].' '.$GLOBALS['TYPO3_CONF_VARS']['SYS']['hhmm'],$row['last_login']).'</td>
-							<td nowrap>'.t3lib_BEfunc::calcAge(time()-$row['last_login'],$GLOBALS['LANG']->php3Lang['labels']['minutesHoursDaysYears']).'</td>
+							<td nowrap>'.t3lib_BEfunc::calcAge(time()-$row['last_login'],$GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.php:labels.minutesHoursDaysYears')).'</td>
 							<td nowrap><a href="index.php?id='.$this->id.'&useruid='.$row['user_uid'].'">'.$row['username'].'</a></td>
 							<td nowrap>'.$row['name'].'</td>
 							<td>'.$row['counter'].'</td>
