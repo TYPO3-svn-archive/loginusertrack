@@ -1,3 +1,7 @@
+2009-04-21  Dmitry Dulepov  <dmitry.dulepov@gmail.com>
+
+	* Changed contact information
+
 2008-07-23	Dmitry Dulepov	<dmitry@typo3.org>
 
 	* Fixed problem with non-existing php3Labels in mod1/index.php
