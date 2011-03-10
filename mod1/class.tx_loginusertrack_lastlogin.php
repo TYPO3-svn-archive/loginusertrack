@@ -48,7 +48,7 @@ class tx_loginusertrack_lastlogin {
 		$content='';
 
 			// Get days back.
-		$daysBack = t3lib_div::intInRange(t3lib_div::GPvar('daysBack'),-1,1000);
+		$daysBack = t3lib_div::intInRange(t3lib_div::_GP('daysBack'),-1,1000);
 
 		$content.= '
 			'.$LANG->getLL('lastlogin_main_enterTheDaysSince','1').':<br>
@@ -92,11 +92,11 @@ class tx_loginusertrack_lastlogin {
 		$content='';
 
 		$tcemain_cmd=array();
-		$testUsername = trim(t3lib_div::GPvar('test_username'));
-		$emailMsg = trim(t3lib_div::GPvar('email_msg'));
-		$action = t3lib_div::GPvar('sendWarningEmail') ? (t3lib_div::GPvar('_DELETE') ? 'delete' : 'email') : '';	// Set to blank, "delete" or "email"
+		$testUsername = trim(t3lib_div::_GP('test_username'));
+		$emailMsg = trim(t3lib_div::_GP('email_msg'));
+		$action = t3lib_div::_GP('sendWarningEmail') ? (t3lib_div::_GP('_DELETE') ? 'delete' : 'email') : '';	// Set to blank, "delete" or "email"
 		$this->subject = $LANG->getLL('lastlogin_removeold_subject');
-		$this->headers = 'From: '.t3lib_div::GPvar('header_name').' <'.t3lib_div::GPvar('header_email').'>';
+		$this->headers = 'From: '.t3lib_div::_GP('header_name').' <'.t3lib_div::_GP('header_email').'>';
 
 
 			// old users:
@@ -167,10 +167,10 @@ class tx_loginusertrack_lastlogin {
 <br>
 <textarea name="email_msg" rows="20" '.$GLOBALS['TBE_TEMPLATE']->formWidthText(48,'').'>'.t3lib_div::formatForTextarea($msg).'</textarea><br>
 <strong>'.$LANG->getLL('lastlogin_removeold_senderName','1').'</strong><br>
-<input type="text" name="header_name" value="'.htmlspecialchars(t3lib_div::GPvar('header_name')?t3lib_div::GPvar('header_name'):$GLOBALS['BE_USER']->user['realName']).'"><br>
+<input type="text" name="header_name" value="'.htmlspecialchars(t3lib_div::_GP('header_name')?t3lib_div::_GP('header_name'):$GLOBALS['BE_USER']->user['realName']).'"><br>
 <strong>'.$LANG->getLL('lastlogin_removeold_senderEmail','1').'</strong><br>
-<input type="text" name="header_email" value="'.htmlspecialchars(t3lib_div::GPvar('header_email')?t3lib_div::GPvar('header_email'):$GLOBALS['BE_USER']->user['email']).'"><br>
-'.$LANG->getLL('lastlogin_removeold_sendATestTo','1').' <input type="text" name="test_username" value="'.htmlspecialchars(t3lib_div::GPvar('test_username')).'"><br>
+<input type="text" name="header_email" value="'.htmlspecialchars(t3lib_div::_GP('header_email')?t3lib_div::_GP('header_email'):$GLOBALS['BE_USER']->user['email']).'"><br>
+'.$LANG->getLL('lastlogin_removeold_sendATestTo','1').' <input type="text" name="test_username" value="'.htmlspecialchars(t3lib_div::_GP('test_username')).'"><br>
 <input type="submit" name="sendWarningEmail" value="'.$LANG->getLL('lastlogin_removeold_sendWarningEmail','1').'"> - <input type="submit" name="_" value="'.$LANG->getLL('lastlogin_removeold_sendUpdate','1').'"><br>
 
 <!--
@@ -211,7 +211,7 @@ class tx_loginusertrack_lastlogin {
 		global $LANG;
 
 			// Total number of 'active' users were created more than XX days ago and having login within the last XX days
-		$orderBy = t3lib_div::GPvar('orderby');
+		$orderBy = t3lib_div::_GP('orderby');
 		$query = 'SELECT uid,username,email,name,lastlogin FROM fe_users WHERE pid='.intval($id).
 			' AND lastlogin > '.(time() - $daysBack*24*3600).
 			' AND crdate < '.(time() - $daysBack*24*3600).

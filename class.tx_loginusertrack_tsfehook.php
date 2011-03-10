@@ -56,7 +56,7 @@ class tx_loginusertrack_tsfehook {
 	public function checkDataSubmission() {
 		if ($GLOBALS['TSFE']->config['config']['tx_loginusertrack_enable']) {
 			if (is_array($GLOBALS['TSFE']->fe_user->user))	{
-				if (t3lib_div::GPvar('logintype') == 'login')	{
+				if (t3lib_div::_GP('logintype') == 'login')	{
 					$this->ext_addNewEntry();
 				} else {
 					$this->ext_updateEntry();

@@ -102,7 +102,7 @@ class tx_loginusertrack_module1 extends t3lib_SCbase {
 				</script>
 			';
 
-			$headerSection = $this->doc->getHeader('pages',$this->pageinfo,$this->pageinfo['_thePath']).'<br>'.$LANG->sL('LLL:EXT:lang/locallang_core.php:labels.path').': '.t3lib_div::fixed_lgd_pre($this->pageinfo['_thePath'],50);
+			$headerSection = $this->doc->getHeader('pages',$this->pageinfo,$this->pageinfo['_thePath']).'<br>'.$LANG->sL('LLL:EXT:lang/locallang_core.php:labels.path').': '.t3lib_div::fixed_lgd_cs($this->pageinfo['_thePath'],-50);
 
 			$this->content.=$this->doc->startPage($LANG->getLL('title'));
 			$this->content.=$this->doc->header($LANG->getLL('title'));
@@ -140,7 +140,6 @@ class tx_loginusertrack_module1 extends t3lib_SCbase {
 	 * @return	void
 	 */
 	function printContent()	{
-		$this->content.=$this->doc->middle();
 		$this->content.=$this->doc->endPage();
 		echo $this->content;
 	}
@@ -153,7 +152,7 @@ class tx_loginusertrack_module1 extends t3lib_SCbase {
 	function moduleContent()	{
 		global $LANG;
 
-		$userId = intval(t3lib_div::GPvar('useruid'));
+		$userId = intval(t3lib_div::_GP('useruid'));
 		$sessId = intval(t3lib_div::_GP('sessid'));
 		switch((string)$this->MOD_SETTINGS['function'])	{
 			case 1:
