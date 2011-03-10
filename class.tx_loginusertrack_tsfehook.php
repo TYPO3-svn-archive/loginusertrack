@@ -85,6 +85,7 @@ class tx_loginusertrack_tsfehook {
 		$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_loginusertrack_stat', $fields);
 		$sesstat_uid = $GLOBALS['TYPO3_DB']->sql_insert_id();
 		$GLOBALS['TSFE']->fe_user->setKey('ses', $this->uidKey, $sesstat_uid);
+		$GLOBALS['TSFE']->fe_user->storeSessionData();
 
 		// Add page stats
 		$fields = array(

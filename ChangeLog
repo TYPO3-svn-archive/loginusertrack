@@ -1,4 +1,10 @@
+2011-03-10	Daniel Minder <typo3@minder.de>
+
+	* Make sure session data is stored even when the user is redirected
+	after logging in
+
 2011-03-04	Daniel Minder <typo3@minder.de>
+
 	* Removed deprecated functions (for GPvar patch thanks to Michiel Roos)
 
 2009-04-21	Dmitry Dulepov  <dmitry.dulepov@gmail.com>
