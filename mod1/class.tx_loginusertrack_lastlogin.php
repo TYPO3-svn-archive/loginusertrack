@@ -123,7 +123,7 @@ class tx_loginusertrack_lastlogin {
 			</tr>';
 
 			if (trim($row['email'])) {
-				$emailsAcc[]=trim($row['email']);
+				$emailsAcc[] = preg_replace('/--/','&#45;&#45;',trim($row['email']));
 			}
 
 			if ($action == 'email')	{
@@ -231,7 +231,7 @@ class tx_loginusertrack_lastlogin {
 		$emailsAcc = array();
 		while(($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
 			if (trim($row['email'])) {
-				$emailsAcc[] = trim($row['email']);
+				$emailsAcc[] = preg_replace('/--/','&#45;&#45;',trim($row['email']));
 			}
 
 			$tRows[] = '<tr bgcolor="'.$GLOBALS['TBE_TEMPLATE']->bgColor4.'">
