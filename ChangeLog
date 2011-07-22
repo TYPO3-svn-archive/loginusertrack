@@ -1,3 +1,8 @@
+2011-05-23	Daniel Minder <typo3@minder.de>
+	
+	* -- must not appear in HTML comments
+	  (Thanks to Sander Lenselink for the report and support)
+
 2011-03-10	Daniel Minder <typo3@minder.de>
 
 	* Make sure session data is stored even when the user is redirected
