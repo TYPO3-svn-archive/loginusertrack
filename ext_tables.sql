@@ -8,6 +8,7 @@ CREATE TABLE tx_loginusertrack_stat (
 	last_page_hit int(11) unsigned DEFAULT '0' NOT NULL,
 	session_hit_counter int(11) unsigned DEFAULT '0' NOT NULL,
 	page_id int(11) unsigned DEFAULT '0' NOT NULL,
+    ip_address char(15) DEFAULT '' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY fe_user (fe_user)

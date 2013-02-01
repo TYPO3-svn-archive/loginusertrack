@@ -176,6 +176,7 @@ class tx_loginusertrack_module1 extends t3lib_SCbase {
 						<td nowrap>'.$row['name'].'</td>
 						<td nowrap>'.t3lib_BEfunc::calcAge($row['last_page_hit']-$row['session_login'],$GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.php:labels.minutesHoursDaysYears')).'</td>
 						<td>'.$row['session_hit_counter'].'</td>
+                        <td>'.$row['ip_address'].'</td>
 					</tr>
 					';
 				}
@@ -189,6 +190,7 @@ class tx_loginusertrack_module1 extends t3lib_SCbase {
 					<td><strong>'.$LANG->getLL('header_name').'</strong></td>
 					<td><strong>'.$LANG->getLL('header_session_lgd').'</strong></td>
 					<td><strong>'.$LANG->getLL('header_pagehits').'</strong></td>
+					<td><strong>'.$LANG->getLL('header_ipaddress').'</strong></td>
 				</tr>
 				'.implode('',$list).'</table>';
 

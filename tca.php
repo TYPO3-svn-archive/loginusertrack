@@ -53,6 +53,13 @@ $TCA['tx_loginusertrack_stat'] = array(
 				'size' => 1,
 			),
 		),
+		'ip_address' => array(
+			'label' => 'LLL:EXT:loginusertrack/locallang_db.xml:tx_loginusertrack_stat.ip_address',
+			'config' => array(
+				'type' => 'input',
+                'max' => 15,
+			),
+		),
 	),
 	'types' => array(
 		0 => array('showitem' => 'fe_user;;;;1,session_login,last_page_hit,session_hit_counter'),

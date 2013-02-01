@@ -81,6 +81,7 @@ class tx_loginusertrack_tsfehook {
 			'last_page_hit' => $GLOBALS['SIM_EXEC_TIME'],
 			'page_id' => $GLOBALS['TSFE']->id,	// unused in ext, compatibility value!
 			'session_hit_counter' => 1,
+            'ip_address' => t3lib_div::getIndpEnv('REMOTE_ADDR'),
 		);
 		$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_loginusertrack_stat', $fields);
 		$sesstat_uid = $GLOBALS['TYPO3_DB']->sql_insert_id();

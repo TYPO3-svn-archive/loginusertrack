@@ -21,6 +21,7 @@
             <label index="header_name">Name:</label>
             <label index="header_session_lgd">Sess. lgd:</label>
             <label index="header_pagehits">Page hits:</label>
+            <label index="header_ipaddress">IP address:</label>
             <label index="header_numsessions">Sessions:</label>
             <label index="header_logins">Logins:</label>
             <label index="header_pid">ID:</label>
@@ -110,6 +111,7 @@ c) The timespan between the date of creation and the last login is at least %s d
             <label index="header_name" type="integer">81871034</label>
             <label index="header_session_lgd" type="integer">40849862</label>
             <label index="header_pagehits" type="integer">74657304</label>
+            <label index="header_ipaddress" type="integer">260233188</label>
             <label index="header_numsessions" type="integer">246703247</label>
             <label index="header_logins" type="integer">198636124</label>
             <label index="header_pid" type="integer">235866885</label>
