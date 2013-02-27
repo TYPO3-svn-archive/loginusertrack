@@ -1,3 +1,7 @@
+2013-02-01	Daniel Minder <typo3@minder.de>
+
+	* Save IP address of user at login and show it in backend
+
 2011-05-23	Daniel Minder <typo3@minder.de>
 	
 	* -- must not appear in HTML comments
