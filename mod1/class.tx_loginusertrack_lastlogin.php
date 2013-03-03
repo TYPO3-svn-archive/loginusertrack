@@ -47,8 +47,16 @@ class tx_loginusertrack_lastlogin {
 		global $LANG;
 		$content='';
 
-			// Get days back.
-		$daysBack = t3lib_div::intInRange(t3lib_div::_GP('daysBack'),-1,1000);
+		// Get days back.
+		$version = class_exists('t3lib_utility_VersionNumber')
+			? t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version)
+			: t3lib_div::int_from_ver(TYPO3_version);
+		if ($version >= 4006000) {
+			$daysBack = t3lib_utility_Math::forceIntegerInRange(t3lib_div::_GP('daysBack'),-1,1000);
+		}
+		else {
+			$daysBack = t3lib_div::intInRange(t3lib_div::_GP('daysBack'),-1,1000);
+		}
 
 		$content.= '
 			'.$LANG->getLL('lastlogin_main_enterTheDaysSince','1').':<br>
