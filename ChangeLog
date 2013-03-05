@@ -1,3 +1,7 @@
+2013-03-03	Daniel Minder <typo3@minder.de>
+
+	* Add switch for deprecated function t3lib_div::intInRange
+
 2013-02-01	Daniel Minder <typo3@minder.de>
 
 	* Save IP address of user at login and show it in backend
