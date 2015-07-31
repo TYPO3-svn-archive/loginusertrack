@@ -55,7 +55,7 @@
 
 You are a registered user on the website %s - that is why you receive this mail.
 
-It appears that you have not logged in with your username/password, ###USERNAME###/###PASSWORD###, during the last %s days.
+It appears that you have not logged in with your username ###USERNAME### during the last %s days.
 
 If you do not log in within 10 days your account may be deleted without further notice.
 

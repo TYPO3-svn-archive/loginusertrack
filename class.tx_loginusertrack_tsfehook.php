@@ -31,9 +31,6 @@
  * [CLASS/FUNCTION INDEX of SCRIPT]
  */
 
-require_once(PATH_t3lib . 'class.t3lib_befunc.php');
-require_once(PATH_t3lib . 'class.t3lib_refindex.php');
-
 /**
  * This class contains a hook to {@link tslib_fe::checkDataSubmission} function.
  * It will check FE user data and record changes. This hook is used instead of
@@ -81,7 +78,7 @@ class tx_loginusertrack_tsfehook {
 			'last_page_hit' => $GLOBALS['SIM_EXEC_TIME'],
 			'page_id' => $GLOBALS['TSFE']->id,	// unused in ext, compatibility value!
 			'session_hit_counter' => 1,
-            'ip_address' => t3lib_div::getIndpEnv('REMOTE_ADDR'),
+			'ip_address' => t3lib_div::getIndpEnv('REMOTE_ADDR'),
 		);
 		$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_loginusertrack_stat', $fields);
 		$sesstat_uid = $GLOBALS['TYPO3_DB']->sql_insert_id();
@@ -100,8 +97,8 @@ class tx_loginusertrack_tsfehook {
 		$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_loginusertrack_pagestat', $fields);
 		$pagestat_uid = $GLOBALS['TYPO3_DB']->sql_insert_id();
 
-		$ref = t3lib_div::makeInstance('t3lib_refindex');
-		/* @var $ref t3lib_refindex */
+		$ref = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Core\Database\ReferenceIndex');
+		/* @var $ref \TYPO3\CMS\Core\Database\ReferenceIndex */
 		$ref->updateRefIndexTable('tx_loginusertrack_stat', $sesstat_uid);
 		$ref->updateRefIndexTable('tx_loginusertrack_pagestat', $pagestat_uid);
 	}
@@ -144,8 +141,8 @@ class tx_loginusertrack_tsfehook {
 					);
 					$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_loginusertrack_pagestat', $fields);
 
-					$ref = t3lib_div::makeInstance('t3lib_refindex');
-					/* @var $ref t3lib_refindex */
+					$ref = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Core\Database\ReferenceIndex');
+					/* @var $ref \TYPO3\CMS\Core\Database\ReferenceIndex */
 					$ref->updateRefIndexTable('tx_loginusertrack_pagestat', $GLOBALS['TYPO3_DB']->sql_insert_id());
 				}
 			}

@@ -1,10 +1,10 @@
 <?php
-if (!defined ("TYPO3_MODE")) {
-	die ("Access denied.");
+if (!defined ('TYPO3_MODE')) {
+	die ('Access denied.');
 }
 
-if (TYPO3_MODE=="BE")	{
-	t3lib_extMgm::addModule("web","txloginusertrackM1","before:info",t3lib_extMgm::extPath($_EXTKEY)."mod1/");
+if (TYPO3_MODE === 'BE')	{
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule("web","txloginusertrackM1","before:info",\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY)."mod1/");
 }
 
 $TCA['tx_loginusertrack_stat'] = array(
@@ -36,5 +36,3 @@ $TCA['tx_loginusertrack_pagestat'] = array(
 	)
 );
 t3lib_extMgm::allowTableOnStandardPages('tx_loginusertrack_pagestat');
-
-?>

@@ -1,4 +1,5 @@
 <?php
+namespace DannyM\Loginusertrack;
 /***************************************************************
 *  Copyright notice
 *
@@ -21,26 +22,18 @@
 *
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+
 /**
- * Hook to record FE user information
+ * Print detailed session statistics
  *
  * @author	Kasper Skaarhoj <kasper@typo3.com>
  * @author	Dmitry Dulepov <dmitry@typo3.org>
  */
-/**
- * [CLASS/FUNCTION INDEX of SCRIPT]
- */
 
-/**
- * This class contains a hook to {@link tslib_fe::checkDataSubmission} function.
- * It will check FE user data and record changes. This hook is used instead of
- * {@link tslib_fe::initFEUser} because we need parsed config array to see
- * if tracking is enabled.
- *
- * @author Kasper Skaarhoj (original XCLASS)
- * @author Dmitry Dulepov (this hook + updates for latest best practicies)
- */
-class tx_loginusertrack_pagestats {
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+
+class PageStats {
 	/**
 	 * Makes report about visited pages.
 	 *
@@ -51,7 +44,7 @@ class tx_loginusertrack_pagestats {
 	 * @return	string	Generated HTML
 	 */
 	function getPageStatsForSession(&$doc, $session_id) {
-		/* @var $doc mediumDoc */
+		/* @var $doc \TYPO3\CMS\Backend\Template\MediumDocumentTemplate */
 		$content = '<table width="100%" border="0" cellpadding="1" cellspacing="1">' .
 			'<tr bgcolor="' . $doc->bgColor5 . '">' .
 			'<td><strong>'.$GLOBALS['LANG']->getLL('header_pid').'</strong></td>' .
@@ -64,14 +57,14 @@ class tx_loginusertrack_pagestats {
 		$res = $GLOBALS['TYPO3_DB']->sql_query('SELECT t1.page_id,t2.title,t1.hits,t1.crdate, t1.tstamp ' .
 				'FROM tx_loginusertrack_pagestat t1 LEFT JOIN pages t2 ON ' .
 				't1.page_id=t2.uid WHERE sesstat_uid=' . intval($session_id) .
-				t3lib_BEfunc::deleteClause('pages', 't2') .
+				BackendUtility::deleteClause('pages', 't2') .
 				' ORDER BY t1.hits DESC');
 		$num = 0;
 		$numResults = $GLOBALS['TYPO3_DB']->sql_num_rows($res);
 		while ($num < 64 && false != ($ar = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
 			$content .= '<tr bgcolor="' . $doc->bgColor4 . '"><td>' .
 				$ar['page_id'] . '</td><td>' .
-				'<a target="_blank" href="' . t3lib_div::getIndpEnv('TYPO3_REQUEST_HOST') . '/index.php?id=' . $ar['page_id'] . '">' .
+				'<a target="_blank" href="' . GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST') . '/index.php?id=' . $ar['page_id'] . '">' .
 					htmlspecialchars($ar['title']) . '</a></td><td>' .
 				 $ar['hits'] . '</td><td>' .
 				date($GLOBALS['TYPO3_CONF_VARS']['SYS']['ddmmyy'].' '.$GLOBALS['TYPO3_CONF_VARS']['SYS']['hhmm'], $ar['crdate']) . '</td><td>' .
@@ -98,7 +91,7 @@ class tx_loginusertrack_pagestats {
 	 * @return	string	Generated HTML
 	 */
 	function getPageStats(&$doc, $user, $periodStart = 0, $periodEnd = 0) {
-		/* @var $doc mediumDoc */
+		/* @var $doc \TYPO3\CMS\Backend\Template\MediumDocumentTemplate */
 		$content = '<table width="100%" border="0" cellpadding="1" cellspacing="1">' .
 			'<tr bgcolor="' . $doc->bgColor5 . '">' .
 			'<td><strong>'.$GLOBALS['LANG']->getLL('header_pid').'</strong></td>' .
@@ -114,7 +107,7 @@ class tx_loginusertrack_pagestats {
 				'MIN(t1.crdate) AS crdate, MAX(t1.tstamp) AS tstamp, page_id, title FROM ' .
 				'tx_loginusertrack_pagestat t1 LEFT JOIN pages t2 ON ' .
 				't1.page_id=t2.uid WHERE fe_user=' . intval($user) .
-				t3lib_BEfunc::deleteClause('pages', 't2') .
+				BackendUtility::deleteClause('pages', 't2') .
 				' GROUP BY page_id ORDER BY hits DESC'
 			);
 		$num = 0;
@@ -122,7 +115,7 @@ class tx_loginusertrack_pagestats {
 		while ($num < 64 && false != ($ar = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
 			$content .= '<tr bgcolor="' . $doc->bgColor4 . '"><td>' .
 				$ar['page_id'] . '</td><td>' .
-				'<a target="_blank" href="' . t3lib_div::getIndpEnv('TYPO3_REQUEST_HOST') . '/index.php?id=' . $ar['page_id'] . '">' .
+				'<a target="_blank" href="' . GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST') . '/index.php?id=' . $ar['page_id'] . '">' .
 					htmlspecialchars($ar['title']) . '</a></td><td>' .
 				$ar['num_sessions'] . '</td><td>' .
 				$ar['num_hits'] . '</td><td>' .
@@ -141,9 +134,3 @@ class tx_loginusertrack_pagestats {
 	}
 
 }
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/loginusertrack/mod1/class.tx_loginusertrack_pagestats.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/loginusertrack/mod1/class.tx_loginusertrack_pagestats.php']);
-}
-
-?>

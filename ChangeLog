@@ -1,3 +1,7 @@
+2015-07-30	Daniel Minder <typo3@minder.de>
+
+	*	Version 6.2 compatibility
+
 2013-03-03	Daniel Minder <typo3@minder.de>
 
 	* Add switch for deprecated function t3lib_div::intInRange
